@@ -12,6 +12,7 @@ import { Container } from "@mui/material";
 import StackComponent from "./components/muiComponents/StackComponent";
 import CardsGridComponent from "./components/CardsGridComponent";
 import BottomNavigationComponent from "./components/BottomNavigationComponent";
+import FatherComponent from "./components/fatherchild/FatherComponent";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
       {/* <CardComponent /> */}
       {/* <StackComponent /> */}
       <CardsGridComponent />
+      {/* <FatherComponent /> */}
       <BottomNavigationComponent />
     </Container>
   );

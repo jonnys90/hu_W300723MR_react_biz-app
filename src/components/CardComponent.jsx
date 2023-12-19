@@ -8,16 +8,26 @@ import {
   Divider,
 } from "@mui/material";
 import car1 from "../assets/imgs/car 1.jpg";
-
-const CardComponent = () => {
+/**
+ * title -> title
+ * subtitle -> subheader
+ */
+const CardComponent = ({ title, subtitle, img, body }) => {
+  // let { title, subtitle, img, body } = props;
+  // console.log(props);
   return (
     <Card square raised>
       <CardActionArea>
-        <CardMedia component="img" image={car1} alt="american massle car" />
-        <CardHeader title="title" subheader="sub title"></CardHeader>
+        <CardMedia
+          component="img"
+          image={img}
+          alt="american massle car"
+          height={200}
+        />
+        <CardHeader title={title} subheader={subtitle}></CardHeader>
         <Divider></Divider>
         <CardContent>
-          <Typography>card body</Typography>
+          <Typography>{body}</Typography>
         </CardContent>
       </CardActionArea>
     </Card>
