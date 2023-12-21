@@ -86,7 +86,7 @@ const CardComponent = ({
 CardComponent.propTypes = {
   title: PropTypes.string.isRequired,
   subtitle: PropTypes.string,
-  img: PropTypes.string.isRequired,
+  img: PropTypes.string,
   phone: PropTypes.string.isRequired,
   address: PropTypes.shape({
     city: PropTypes.string.isRequired,
@@ -94,6 +94,11 @@ CardComponent.propTypes = {
     houseNumber: PropTypes.number.isRequired,
   }).isRequired,
   cardNumber: PropTypes.number.isRequired,
+};
+
+CardComponent.defaultProps = {
+  img: car1,
+  subtitle: "subtitle default",
 };
 
 export default CardComponent;
