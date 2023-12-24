@@ -9,6 +9,7 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
+import HomePage from "../pages/HomePage/HomePage";
 
 const LayoutComponent = () => {
   const [isDarkTheme, setDarkTheme] = useState(false);
@@ -34,7 +35,7 @@ const LayoutComponent = () => {
         onThemeChange={handleThemeChange}
       />
       <MainComponent>
-        <RegisterPage />
+        <HomePage />
       </MainComponent>
       <FooterComponent />
     </ThemeProvider>

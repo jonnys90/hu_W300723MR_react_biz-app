@@ -26,9 +26,15 @@ const CardComponent = ({
   phone,
   address,
   cardNumber,
+  id,
+  onDelete,
 }) => {
   // let { title, subtitle, img, body } = props;
   // console.log(props);
+  const handleDeleteClick = () => {
+    console.log("Clicked on delete", id);
+    onDelete(id);
+  };
   return (
     <Card square raised>
       <CardActionArea>
@@ -62,7 +68,7 @@ const CardComponent = ({
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box>
-            <IconButton>
+            <IconButton onClick={handleDeleteClick}>
               <DeleteIcon />
             </IconButton>
             <IconButton>
