@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 /* mui hooks */
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -6,7 +7,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -14,10 +14,13 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import CopyrightComponent from "./ui/CopyrightComponent";
 
+import ROUTES from "../../routes/ROUTES";
+
 const LoginPage = () => {
   /* top lvl for hooks */
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const navigate = useNavigate();
   /**
    * const emailArrState = useState("")
    * let emailValue = emailArrState[0] -> value of current state
@@ -32,6 +35,11 @@ const LoginPage = () => {
   const handlePasswordChange = (e) => {
     // console.log(e.target.value);
     setPasswordValue(e.target.value);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault(); //stop refresh
+    //status ok from server
+    navigate(ROUTES.HOME);
   };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -68,7 +76,12 @@ const LoginPage = () => {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -112,7 +125,7 @@ const LoginPage = () => {
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link to={ROUTES.REGISTER}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

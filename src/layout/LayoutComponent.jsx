@@ -11,7 +11,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
 import HomePage from "../pages/HomePage/HomePage";
 
-const LayoutComponent = () => {
+const LayoutComponent = ({ children }) => {
   const [isDarkTheme, setDarkTheme] = useState(false);
 
   const themes = tmc({
@@ -34,9 +34,7 @@ const LayoutComponent = () => {
         isDarkTheme={isDarkTheme}
         onThemeChange={handleThemeChange}
       />
-      <MainComponent>
-        <HomePage />
-      </MainComponent>
+      <MainComponent>{children}</MainComponent>
       <FooterComponent />
     </ThemeProvider>
   );

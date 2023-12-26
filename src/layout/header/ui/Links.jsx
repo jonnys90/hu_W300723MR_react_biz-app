@@ -1,9 +1,5 @@
 import { Box } from "@mui/material";
-import myLinks, {
-  alwaysLinks,
-  loggedInLinks,
-  loggedOutLinks,
-} from "../../myLinks";
+import { alwaysLinks, loggedInLinks, loggedOutLinks } from "../../myLinks";
 import NavLinkComponent from "../NavLinkComponent";
 
 const Links = () => {
