@@ -8,6 +8,7 @@ const LifeCycleHooksPage = () => {
     return 0;
   });
   const [show, setShow] = useState(true);
+  // !do not add async in the callback function
   useEffect(() => {
     /* will work every time state update */
     console.log("useEffect");
@@ -31,7 +32,7 @@ const LifeCycleHooksPage = () => {
     <Fragment>
       {console.log("from html")}
       <Button variant="contained" onClick={handleBtnClick}>
-        +1
+        +2
       </Button>
       <Typography>LifeCycleHooksPage, count: {count}</Typography>
       <Button variant="contained" onClick={handleToggleBtnClick}>
