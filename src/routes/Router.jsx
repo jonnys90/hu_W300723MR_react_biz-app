@@ -5,8 +5,12 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import AboutUsPage from "./../pages/AboutUsPage";
-import CardsExamplePage from "../pages/CardsExamplePage";
+import CardsExamplePage from "../sandbox/pages/CardsExamplePage";
 import EditCardPage from "../pages/EditCardPage";
+import FirstComponent from "./../sandbox/components/FirstComponent";
+import FatherComponent from "../sandbox/components/fatherchild/FatherComponent";
+import SandboxPage from "../sandbox/pages/SandboxPage";
+import LifeCycleHooksPage from "../sandbox/pages/LifeCycleHooksPage";
 const Router = () => {
   //http://localhost:3000/
   return (
@@ -18,8 +22,18 @@ const Router = () => {
       <Route path={`${ROUTES.EDITCARD}/:id`} element={<EditCardPage />} />
       {/* <Route path="/edit/:id" element={<EditCardPage />} /> */}
       <Route path="/cards-example" element={<CardsExamplePage />} />
+      <Route path="/sandbox" element={<SandboxPage />}>
+        <Route path="first-component" element={<FirstComponent />} />
+        <Route path="fc" element={<FatherComponent />} />
+        <Route path="lch" element={<LifeCycleHooksPage />} />
+      </Route>
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };
 export default Router;
+/**
+ * /sandbox/a1
+ * /sandbox/a2
+ * /sandbox/a3
+ */

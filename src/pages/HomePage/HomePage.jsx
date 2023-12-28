@@ -1,8 +1,9 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CardComponent from "../../components/CardComponent";
+import { useState } from "react";
 
-const initialDataFromServer = [
+let initialDataFromServer = [
   {
     id: "sdlfkjgn0",
     title: "title1",
@@ -42,17 +43,22 @@ const initialDataFromServer = [
 
 // const initialDataFromServer = [];
 
-const handleDeleteCard = (id) => {
-  console.log("father: card to delete", id);
-};
-
 const HomePage = () => {
-  if (!initialDataFromServer || !initialDataFromServer.length) {
+  const [dataFromServer, setDataFromServer] = useState(initialDataFromServer);
+  if (!dataFromServer || !dataFromServer.length) {
     return <Typography>Could not find any items</Typography>;
   }
+  const handleDeleteCard = (id) => {
+    console.log("father: card to delete", id);
+    setDataFromServer((currentDataFromServer) =>
+      currentDataFromServer.filter((card) => card.id !== id)
+    );
+    console.log({ dataFromServer });
+  };
+
   return (
     <Grid container spacing={2}>
-      {initialDataFromServer.map((item, index) => (
+      {dataFromServer.map((item, index) => (
         <Grid item lg={3} md={6} xs={12} key={"carsCard" + index}>
           <CardComponent
             id={item.id}

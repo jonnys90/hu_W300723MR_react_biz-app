@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Stack } from "@mui/material";
-import ROUTES from "../routes/ROUTES";
+import ROUTES from "../../routes/ROUTES";
 
 const CardsExamplePage = () => {
   return (

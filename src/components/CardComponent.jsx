@@ -13,7 +13,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ModeIcon from "@mui/icons-material/Mode";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import car1 from "../assets/imgs/car 1.jpg";
 import PropTypes from "prop-types";
 /**
  * title -> title
@@ -103,7 +102,7 @@ CardComponent.propTypes = {
 };
 
 CardComponent.defaultProps = {
-  img: car1,
+  img: "/assets/imgs/car 1.jpg",
   subtitle: "subtitle default",
 };
 
