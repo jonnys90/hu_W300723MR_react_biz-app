@@ -28,6 +28,7 @@ const CardComponent = ({
   id,
   onDelete,
 }) => {
+  console.log("rerender from CardComponent");
   // let { title, subtitle, img, body } = props;
   // console.log(props);
   const handleDeleteClick = () => {

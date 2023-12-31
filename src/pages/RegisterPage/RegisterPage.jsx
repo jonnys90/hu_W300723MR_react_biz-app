@@ -9,13 +9,30 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
+import axios from "axios";
+import ROUTES from "../../routes/ROUTES";
+import { useNavigate } from "react-router-dom";
+import normalizeRegister from "./normalizeRegister";
 
 const RegisterPage = () => {
+  //eman, asaf, rawunak
   const [inputsValue, setInputsValue] = useState({
     first: "",
     middle: "",
     last: "",
+    email: "",
+    password: "",
+    phone: "",
+    url: "",
+    alt: "",
+    state: "",
+    country: "",
+    city: "",
+    street: "",
+    houseNumber: "",
+    zip: "",
   });
+  const navigate = useNavigate();
   const handleInputsChange = (e) => {
     /**
      * e.target.id -> name of property to update
@@ -47,6 +64,15 @@ const RegisterPage = () => {
       [e.target.id]: e.target.value,
     }));
   };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("/users", normalizeRegister(inputsValue));
+      navigate(ROUTES.LOGIN);
+    } catch (err) {
+      console.log("error from axios", err);
+    }
+  };
   return (
     <Box
       sx={{
@@ -62,7 +88,7 @@ const RegisterPage = () => {
       <Typography component="h1" variant="h5">
         Sign up
       </Typography>
-      <Box component="form" noValidate sx={{ mt: 3 }}>
+      <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -109,6 +135,8 @@ const RegisterPage = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
+              value={inputsValue.email}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -120,6 +148,8 @@ const RegisterPage = () => {
               type="password"
               id="password"
               autoComplete="new-password"
+              value={inputsValue.password}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -130,6 +160,8 @@ const RegisterPage = () => {
               label="Phone"
               id="phone"
               autoComplete="new-phone"
+              value={inputsValue.phone}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -139,6 +171,8 @@ const RegisterPage = () => {
               label="Url"
               id="url"
               autoComplete="new-url"
+              value={inputsValue.url}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -148,6 +182,8 @@ const RegisterPage = () => {
               label="Alt"
               id="alt"
               autoComplete="new-alt"
+              value={inputsValue.alt}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -157,6 +193,8 @@ const RegisterPage = () => {
               label="State"
               id="state"
               autoComplete="new-state"
+              value={inputsValue.state}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -167,6 +205,8 @@ const RegisterPage = () => {
               label="Country"
               id="country"
               autoComplete="new-country"
+              value={inputsValue.country}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -177,6 +217,8 @@ const RegisterPage = () => {
               label="City"
               id="city"
               autoComplete="new-city"
+              value={inputsValue.city}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -187,6 +229,8 @@ const RegisterPage = () => {
               label="Street"
               id="street"
               autoComplete="new-street"
+              value={inputsValue.street}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -197,6 +241,8 @@ const RegisterPage = () => {
               label="House Number"
               id="houseNumber"
               autoComplete="new-houseNumber"
+              value={inputsValue.houseNumber}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>
@@ -206,6 +252,8 @@ const RegisterPage = () => {
               label="Zip"
               id="zip"
               autoComplete="new-zip"
+              value={inputsValue.zip}
+              onChange={handleInputsChange}
             />
           </Grid>
           <Grid item xs={12}>

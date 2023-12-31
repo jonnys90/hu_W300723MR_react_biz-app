@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Button from "@mui/material/Button";
 
 /**
@@ -6,15 +7,14 @@ import Button from "@mui/material/Button";
  * when calling the function in the html part, dont add ()
  */
 
-const ButtonComponent = ({ color, children }) => {
-  const handleBtnClick = () => {
-    console.log("you press on a btn");
-  };
+const ButtonComponent = ({ color, children, onClick }) => {
+  console.log("Button rerender");
   return (
-    <Button variant="contained" color={color} onClick={handleBtnClick}>
+    <Button variant="contained" color={color} onClick={onClick}>
       {children}
     </Button>
   );
 };
 
-export default ButtonComponent;
+// export default ButtonComponent;
+export default memo(ButtonComponent);

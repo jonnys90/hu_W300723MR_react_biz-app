@@ -15,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import CopyrightComponent from "./ui/CopyrightComponent";
 
 import ROUTES from "../../routes/ROUTES";
+import axios from "axios";
 
 const LoginPage = () => {
   /* top lvl for hooks */
@@ -36,10 +37,18 @@ const LoginPage = () => {
     // console.log(e.target.value);
     setPasswordValue(e.target.value);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(); //stop refresh
     //status ok from server
-    navigate(ROUTES.HOME);
+    try {
+      let { data } = await axios.post("/users/login", {
+        email: emailValue,
+        password: passwordValue,
+      });
+      navigate(ROUTES.HOME);
+    } catch (err) {
+      console.log("err from axios", err);
+    }
   };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
