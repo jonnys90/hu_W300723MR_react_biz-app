@@ -12,6 +12,7 @@ import FatherComponent from "../sandbox/components/fatherchild/FatherComponent";
 import SandboxPage from "../sandbox/pages/SandboxPage";
 import LifeCycleHooksPage from "../sandbox/pages/LifeCycleHooksPage";
 import MemoPage from "../sandbox/pages/MemoPage";
+import ContextPage from "../sandbox/pages/ContextPage";
 const Router = () => {
   //http://localhost:3000/
   return (
@@ -29,6 +30,7 @@ const Router = () => {
         <Route path="lch" element={<LifeCycleHooksPage />} />
       </Route>
       <Route path="/memo" element={<MemoPage />} />
+      <Route path="/context" element={<ContextPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

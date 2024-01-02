@@ -45,6 +45,8 @@ const LoginPage = () => {
         email: emailValue,
         password: passwordValue,
       });
+      console.log("data from axios", data);
+      localStorage.setItem("token", data);
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("err from axios", err);
