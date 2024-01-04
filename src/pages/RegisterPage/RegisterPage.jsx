@@ -9,10 +9,17 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
+import Alert from "@mui/material/Alert";
 import axios from "axios";
 import ROUTES from "../../routes/ROUTES";
 import { useNavigate } from "react-router-dom";
 import normalizeRegister from "./normalizeRegister";
+import {
+  validateEmailLogin,
+  validatePasswordLogin,
+  validateFirstSchema,
+  validateSchema,
+} from "../../validation/registerValidation";
 
 const RegisterPage = () => {
   //eman, asaf, rawunak
@@ -26,6 +33,18 @@ const RegisterPage = () => {
     url: "",
     alt: "",
     state: "",
+    country: "",
+    city: "",
+    street: "",
+    houseNumber: "",
+    zip: "",
+  });
+  const [errors, setErrors] = useState({
+    first: "",
+    last: "",
+    email: "",
+    password: "",
+    phone: "",
     country: "",
     city: "",
     street: "",
@@ -64,6 +83,36 @@ const RegisterPage = () => {
       [e.target.id]: e.target.value,
     }));
   };
+  const handleInputsBlur = (e) => {
+    /**
+     * validateSchema[e.target.id] -> function to validate the current input
+     * inputsValue[e.target.id] -> the value inside the input
+     */
+    let dataFromJoi = validateSchema[e.target.id]({
+      [e.target.id]: inputsValue[e.target.id],
+    });
+    /*
+      {email:emailValue}
+    */
+    console.log("dataFromJoi", dataFromJoi);
+    if (dataFromJoi.error) {
+      // setPasswordError(dataFromJoi.error.details[0].message);
+      setErrors((copyOfErrors) => ({
+        ...copyOfErrors,
+        [e.target.id]: dataFromJoi.error.details[0].message,
+      }));
+    } else {
+      setErrors((copyOfErrors) => {
+        delete copyOfErrors[e.target.id];
+        return { ...copyOfErrors };
+      });
+    }
+    // if (dataFromJoi.error) {
+    //   setPasswordError(dataFromJoi.error.details[0].message);
+    // } else {
+    //   setPasswordError("");
+    // }
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -101,7 +150,9 @@ const RegisterPage = () => {
               autoFocus
               value={inputsValue.first}
               onChange={handleInputsChange}
+              onBlur={handleInputsBlur}
             />
+            {errors.first && <Alert severity="error">{errors.first}</Alert>}
           </Grid>
           <Grid item xs={12} sm={4}>
             <TextField
@@ -268,6 +319,7 @@ const RegisterPage = () => {
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
+          disabled={Object.keys(errors).length > 0}
         >
           Sign Up
         </Button>

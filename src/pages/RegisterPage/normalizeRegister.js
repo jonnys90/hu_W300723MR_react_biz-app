@@ -20,7 +20,7 @@ const normalizeRegister = (data) => {
       houseNumber: data.houseNumber,
       zip: data.zip,
     },
-    isBusiness: false,
+    isBusiness: true,
   };
 };
 
