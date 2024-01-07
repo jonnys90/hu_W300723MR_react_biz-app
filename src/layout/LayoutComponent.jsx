@@ -5,8 +5,11 @@ import HeaderComponent from "./header/HeaderComponent";
 import MainComponent from "./main/MainComponent";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
+import useAutoLogin from "../hooks/useAutoLogin";
+import Typography from "@mui/material/Typography";
 
 const LayoutComponent = ({ children }) => {
+  const finishAutoLogin = useAutoLogin();
   const [isDarkTheme, setDarkTheme] = useState(false);
 
   const themes = tmc({
@@ -22,6 +25,9 @@ const LayoutComponent = ({ children }) => {
     setDarkTheme(checked);
   };
 
+  // if (!finishAutoLogin) {
+  //   return <Typography>Loading...</Typography>;
+  // }
   return (
     <ThemeProvider theme={isDarkTheme ? darkMode : lightMode}>
       <CssBaseline />
@@ -29,7 +35,13 @@ const LayoutComponent = ({ children }) => {
         isDarkTheme={isDarkTheme}
         onThemeChange={handleThemeChange}
       />
-      <MainComponent>{children}</MainComponent>
+      <MainComponent>
+        {finishAutoLogin ? (
+          children
+        ) : (
+          <Typography variant="h1">Loading...</Typography>
+        )}
+      </MainComponent>
       <FooterComponent />
     </ThemeProvider>
   );

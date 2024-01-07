@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LayoutComponent from "./layout/LayoutComponent";
 import Router from "./routes/Router";
 import { CounterSettingContext } from "./store/counterContext";
@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 function App() {
   const [counter, setCounter] = useState(0);
   const [login, setLogin] = useState(null);
+
   return (
     <CounterSettingContext.Provider value={{ counter, setCounter }}>
       <LoginContext.Provider value={{ login, setLogin }}>
