@@ -3,6 +3,8 @@ import Typography from "@mui/material/Typography";
 import CardComponent from "../../components/CardComponent";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/ROUTES";
 
 let initialDataFromServer = [
   {
@@ -47,6 +49,7 @@ let initialDataFromServer = [
 //https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards
 const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
+  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get("/cards")
@@ -69,6 +72,10 @@ const HomePage = () => {
     console.log({ dataFromServer });
   };
 
+  const handleEditCard = (id) => {
+    navigate(`${ROUTES.EDITCARD}/${id}`);
+  };
+
   return (
     <Grid container spacing={2}>
       {dataFromServer.map((item, index) => (
@@ -82,6 +89,7 @@ const HomePage = () => {
             address={item.address}
             cardNumber={item.bizNumber}
             onDelete={handleDeleteCard}
+            onEdit={handleEditCard}
           />
         </Grid>
       ))}

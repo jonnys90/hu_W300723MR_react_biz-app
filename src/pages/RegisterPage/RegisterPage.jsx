@@ -161,7 +161,6 @@ const RegisterPage = () => {
               fullWidth
               id="middle"
               label="Middle Name"
-              autoFocus
               value={inputsValue.middle}
               onChange={handleInputsChange}
             />

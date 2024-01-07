@@ -13,6 +13,9 @@ import SandboxPage from "../sandbox/pages/SandboxPage";
 import LifeCycleHooksPage from "../sandbox/pages/LifeCycleHooksPage";
 import MemoPage from "../sandbox/pages/MemoPage";
 import ContextPage from "../sandbox/pages/ContextPage";
+import ProfilePage from "../pages/ProfilePage";
+import AuthGuard from "../guard/AuthGuard";
+import BizGuard from "../guard/BizGuard";
 const Router = () => {
   //http://localhost:3000/
   return (
@@ -21,7 +24,22 @@ const Router = () => {
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutUsPage />} />
-      <Route path={`${ROUTES.EDITCARD}/:id`} element={<EditCardPage />} />
+      <Route
+        path={`${ROUTES.EDITCARD}/:id`}
+        element={
+          <BizGuard>
+            <EditCardPage />
+          </BizGuard>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <AuthGuard>
+            <ProfilePage />
+          </AuthGuard>
+        }
+      />
       {/* <Route path="/edit/:id" element={<EditCardPage />} /> */}
       <Route path="/cards-example" element={<CardsExamplePage />} />
       <Route path="/sandbox" element={<SandboxPage />}>

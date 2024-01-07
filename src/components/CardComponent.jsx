@@ -27,6 +27,7 @@ const CardComponent = ({
   cardNumber,
   id,
   onDelete,
+  onEdit,
 }) => {
   console.log("rerender from CardComponent");
   // let { title, subtitle, img, body } = props;
@@ -34,6 +35,9 @@ const CardComponent = ({
   const handleDeleteClick = () => {
     console.log("Clicked on delete", id);
     onDelete(id);
+  };
+  const handleEditClick = () => {
+    onEdit(id);
   };
   return (
     <Card square raised>
@@ -71,7 +75,7 @@ const CardComponent = ({
             <IconButton onClick={handleDeleteClick}>
               <DeleteIcon />
             </IconButton>
-            <IconButton>
+            <IconButton onClick={handleEditClick}>
               <ModeIcon />
             </IconButton>
           </Box>
