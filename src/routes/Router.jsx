@@ -6,7 +6,7 @@ import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import AboutUsPage from "./../pages/AboutUsPage";
 import CardsExamplePage from "../sandbox/pages/CardsExamplePage";
-import EditCardPage from "../pages/EditCardPage";
+import EditCardPage from "../pages/EditCardPage/EditCardPage";
 import FirstComponent from "./../sandbox/components/FirstComponent";
 import FatherComponent from "../sandbox/components/fatherchild/FatherComponent";
 import SandboxPage from "../sandbox/pages/SandboxPage";

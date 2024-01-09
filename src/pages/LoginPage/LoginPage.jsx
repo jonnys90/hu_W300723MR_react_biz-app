@@ -67,9 +67,9 @@ const LoginPage = () => {
 
       console.log("data from axios", data);
       localStorage.setItem("token", data);
-      const decoded = jwtDecode(data); //convert token to object
-      console.log("decoded", decoded);
-      setLogin(decoded);
+      const userInfoFromToken = jwtDecode(data); //convert token to object
+      console.log("userInfoFromToken", userInfoFromToken);
+      setLogin(userInfoFromToken);
       toast.success("🦄 LoggedIn Successfully", {
         position: "top-right",
         autoClose: 5000,
