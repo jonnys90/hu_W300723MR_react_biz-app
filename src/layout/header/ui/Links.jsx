@@ -11,6 +11,13 @@ import LoginContext from "../../../store/loginContext";
 
 const Links = () => {
   const { login } = useContext(LoginContext);
+  /**
+   * login = {
+   *  _id:"oisjdfgewroitgjerwio"
+   *  isAdmin,
+   *  isBiz
+   * }
+   */
   const loggedIn = login;
   return (
     <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>

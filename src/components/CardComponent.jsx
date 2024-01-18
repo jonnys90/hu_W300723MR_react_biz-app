@@ -26,8 +26,10 @@ const CardComponent = ({
   address,
   cardNumber,
   id,
+  liked,
   onDelete,
   onEdit,
+  onLike,
 }) => {
   console.log("rerender from CardComponent");
   // let { title, subtitle, img, body } = props;
@@ -38,6 +40,9 @@ const CardComponent = ({
   };
   const handleEditClick = () => {
     onEdit(id);
+  };
+  const handleLikeClick = () => {
+    onLike(id);
   };
   return (
     <Card square raised>
@@ -83,8 +88,8 @@ const CardComponent = ({
             <IconButton>
               <LocalPhoneIcon />
             </IconButton>
-            <IconButton>
-              <FavoriteIcon />
+            <IconButton onClick={handleLikeClick}>
+              <FavoriteIcon color={liked ? "error" : "inherit"} />
             </IconButton>
           </Box>
         </Box>

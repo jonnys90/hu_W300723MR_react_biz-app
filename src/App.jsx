@@ -8,7 +8,13 @@ import { ToastContainer } from "react-toastify";
 function App() {
   const [counter, setCounter] = useState(0);
   const [login, setLogin] = useState(null);
-
+  /**
+   * login = {
+	_id:"oisjdfgewroitgjerwio"
+	isAdmin:true,
+	isBiz:false
+}
+   */
   return (
     <CounterSettingContext.Provider value={{ counter, setCounter }}>
       <LoginContext.Provider value={{ login, setLogin }}>

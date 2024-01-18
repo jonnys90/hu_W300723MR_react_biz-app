@@ -69,6 +69,13 @@ const LoginPage = () => {
       localStorage.setItem("token", data);
       const userInfoFromToken = jwtDecode(data); //convert token to object
       console.log("userInfoFromToken", userInfoFromToken);
+      /**
+       * {
+       *  _id:"34098235098",
+       * isAdmin: true,
+       * isBusiness:true
+       * }
+       */
       setLogin(userInfoFromToken);
       toast.success("🦄 LoggedIn Successfully", {
         position: "top-right",

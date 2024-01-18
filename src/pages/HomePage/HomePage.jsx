@@ -1,67 +1,34 @@
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CardComponent from "../../components/CardComponent";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
-
-let initialDataFromServer = [
-  {
-    id: "sdlfkjgn0",
-    title: "title1",
-    subtitle: "subtitle1",
-    body: "body1",
-    img: "/assets/imgs/car 1.jpg",
-  },
-  {
-    id: "sdlfkjgn1",
-    title: "title2",
-    subtitle: "subtitle2",
-    body: "body2",
-    img: "/assets/imgs/car 2.jpg",
-  },
-  {
-    id: "sdlfkjgn2",
-    title: "title3",
-    subtitle: "subtitle3",
-    body: "body3",
-    img: "/assets/imgs/car 3.jpg",
-  },
-  {
-    id: "sdlfkjgn3",
-    title: "title4",
-    subtitle: "subtitle4",
-    body: "body4",
-    img: "/assets/imgs/car 4.jpg",
-  },
-  {
-    id: "sdlfkjgn4",
-    title: "title5",
-    subtitle: "subtitle5",
-    body: "body5",
-    img: "/assets/imgs/car 5.png",
-  },
-];
-
-// const initialDataFromServer = [];
+import normalizeHome from "./normalizeHome";
+import LoginContext from "../../store/loginContext";
 
 //https://monkfish-app-z9uza.ondigitalocean.app/bcard2/cards
 const HomePage = () => {
   const [dataFromServer, setDataFromServer] = useState([]);
   const navigate = useNavigate();
+  const { login } = useContext(LoginContext);
   useEffect(() => {
     axios
       .get("/cards")
       .then(({ data }) => {
-        console.log(data);
-        setDataFromServer(data);
+        console.log(normalizeHome(data));
+        setDataFromServer(normalizeHome(data));
       })
       .catch((err) => {
         console.log("error from axios", err);
       });
   }, []);
-  if (!dataFromServer || !dataFromServer.length) {
+  let dataFromServerFiltered = normalizeHome(
+    dataFromServer,
+    login ? login._id : undefined
+  );
+  if (!dataFromServerFiltered || !dataFromServerFiltered.length) {
     return <Typography>Could not find any items</Typography>;
   }
   const handleDeleteCard = (id) => {
@@ -69,16 +36,35 @@ const HomePage = () => {
     setDataFromServer((currentDataFromServer) =>
       currentDataFromServer.filter((card) => card._id !== id)
     );
-    console.log({ dataFromServer });
+    console.log({ dataFromServerFiltered });
   };
 
   const handleEditCard = (id) => {
     navigate(`${ROUTES.EDITCARD}/${id}`);
   };
 
+  const handleLikeCard = async (id) => {
+    //axios
+    console.log("you liked card", id);
+    try {
+      let { data } = await axios.patch("/cards/" + id);
+      console.log("data from axios (patch)", data);
+      setDataFromServer((cDataFromServer) => {
+        let cardIndex = cDataFromServer.findIndex((card) => card._id === id);
+        if (cardIndex) {
+          cDataFromServer[cardIndex] = data;
+        }
+        return [...cDataFromServer];
+      });
+      //update cards from server
+    } catch (err) {
+      console.log("error from axios (like)", err);
+    }
+  };
+
   return (
     <Grid container spacing={2}>
-      {dataFromServer.map((item, index) => (
+      {dataFromServerFiltered.map((item, index) => (
         <Grid item lg={3} md={6} xs={12} key={"carsCard" + index}>
           <CardComponent
             id={item._id}
@@ -88,8 +74,10 @@ const HomePage = () => {
             phone={item.phone}
             address={item.address}
             cardNumber={item.bizNumber}
+            liked={item.liked}
             onDelete={handleDeleteCard}
             onEdit={handleEditCard}
+            onLike={handleLikeCard}
           />
         </Grid>
       ))}
