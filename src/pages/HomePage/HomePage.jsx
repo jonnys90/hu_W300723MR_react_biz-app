@@ -24,7 +24,7 @@ const HomePage = () => {
         console.log("error from axios", err);
       });
   }, []);
-  let dataFromServerFiltered = normalizeHome(
+  const dataFromServerFiltered = normalizeHome(
     dataFromServer,
     login ? login._id : undefined
   );
@@ -51,7 +51,7 @@ const HomePage = () => {
       console.log("data from axios (patch)", data);
       setDataFromServer((cDataFromServer) => {
         let cardIndex = cDataFromServer.findIndex((card) => card._id === id);
-        if (cardIndex) {
+        if (cardIndex >= 0) {
           cDataFromServer[cardIndex] = data;
         }
         return [...cDataFromServer];
