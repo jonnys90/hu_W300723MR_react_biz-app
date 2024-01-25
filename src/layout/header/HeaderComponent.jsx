@@ -160,7 +160,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             component="div"
             sx={{ display: { xs: "none", sm: "block" } }}
           >
-            LOG
+            LOGO
           </Typography>
           <Links />
           <FilterComponent />
